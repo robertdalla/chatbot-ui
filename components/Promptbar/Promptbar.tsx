@@ -114,7 +114,12 @@ const Promptbar = () => {
     } else {
       promptDispatch({ field: 'filteredPrompts', value: prompts });
     }
-  }, [searchTerm, prompts]);
+  },
+  [
+    searchTerm,
+    prompts,
+    promptDispatch
+  ]);
 
   return (
     <PromptbarContext.Provider
