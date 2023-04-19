@@ -202,12 +202,7 @@ export const Chatbar = () => {
         value: conversations,
       });
     }
-  },
-  [
-    searchTerm,
-    conversations,
-    chatDispatch
-  ]);
+  }, [searchTerm, conversations]);
 
   return (
     <ChatbarContext.Provider

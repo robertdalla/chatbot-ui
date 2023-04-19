@@ -231,10 +231,7 @@ const Home = ({
     if (window.innerWidth < 640) {
       dispatch({ field: 'showChatbar', value: false });
     }
-  },
-  [selectedConversation,
-    dispatch
-  ]);
+  }, [selectedConversation]);
 
   useEffect(() => {
     defaultModelId &&

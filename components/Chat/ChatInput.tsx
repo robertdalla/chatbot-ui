@@ -237,11 +237,7 @@ export const ChatInput = ({
         textareaRef?.current?.scrollHeight > 400 ? 'auto' : 'hidden'
       }`;
     }
-  },
-  [
-    content,
-    textareaRef
-  ]);
+  }, [content]);
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
