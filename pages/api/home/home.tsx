@@ -354,6 +354,7 @@ const Home = ({
     dispatch,
     serverSideApiKeyIsSet,
     serverSidePluginKeysSet,
+    conversations,
   ]);
 
   return (
