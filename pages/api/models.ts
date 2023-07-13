@@ -53,8 +53,9 @@ const handler = async (req: Request): Promise<Response> => {
         const model_name = (OPENAI_API_TYPE === 'azure') ? model.model : model.id;
         for (const [key, value] of Object.entries(OpenAIModelID)) {
           if (value === model_name) {
+            console.log("model available:", "\n  openAI model name: " + model_name, "\n  Chatbot-UI model name: " + OpenAIModels[value].name);
             return {
-              id: model.id,
+              id: model_name, // Todo: original code was model.id, however not sure if this is correct for Azure!
               name: OpenAIModels[value].name,
             };
           }
