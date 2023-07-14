@@ -8,6 +8,8 @@ import {
   isLatestExportFormat,
 } from '@/utils/app/importExport';
 
+import { cleanSourceText } from '@/utils/server/google.ts';
+
 import { ExportFormatV1, ExportFormatV2, ExportFormatV4 } from '@/types/export';
 import { OpenAIModelID, OpenAIModels } from '@/types/openai';
 
@@ -260,5 +262,33 @@ describe('cleanData Functions', () => {
         ],
       });
     });
+  });
+});
+
+describe('cleanSourceText', () => {
+  it('should remove extra newlines', () => {
+    const input = 'Some text\n\n\n\n\nwith extra newlines.';
+    const expectedOutput = 'Some text \nwith extra newlines.';
+    expect(cleanSourceText(input)).toEqual(expectedOutput);
+  });
+  it('should replace 2+ consecutive newlines with a single space', () => {
+    const input = 'Some text\n\nwith consecutive\n\nnewlines.';
+    const expectedOutput = 'Some text with consecutive newlines.';
+    expect(cleanSourceText(input)).toEqual(expectedOutput);
+  });
+  it('should replace 3+ consecutive spaces with double spaces', () => {
+    const input = 'Some text    with multiple   spaces.';
+    const expectedOutput = 'Some text  with multiple  spaces.';
+    expect(cleanSourceText(input)).toEqual(expectedOutput);
+  });
+  it('should remove all tabs', () => {
+    const input = 'Some text\t with a tab.';
+    const expectedOutput = 'Some text with a tab.';
+    expect(cleanSourceText(input)).toEqual(expectedOutput);
+  });
+  it('should remove empty lines', () => {
+    const input = 'Some \ntext\n\t with empty lines.\n   ';
+    const expectedOutput = 'Some \ntext\n with empty lines.';
+    expect(cleanSourceText(input)).toEqual(expectedOutput);
   });
 });
